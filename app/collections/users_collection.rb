@@ -1,0 +1,2 @@
+class UsersCollection < ApplicationCollection
+end
