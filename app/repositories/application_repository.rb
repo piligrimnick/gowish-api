@@ -11,7 +11,7 @@ class ApplicationRepository
     structurize
   end
 
-  def where(params)
+  def filter(params)
     @objects = gateway.where(params)
 
     structurize

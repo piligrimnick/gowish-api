@@ -7,11 +7,13 @@ require_relative 'factory_registry'
 Rails.application.initialize!
 
 REPOSITORIES = {
-  users: UsersRepository.new(gateway: User, collection: UsersCollection, struct: UserStruct)
+  users: UsersRepository.new(gateway: User, collection: UsersCollection, struct: UserStruct),
+  wishes: WishesRepository.new(gateway: Wish, collection: WishesCollection, struct: WishStruct)
 }
 
 FACTORIES = {
-  user: UserFactory.new(gateway: User, struct: UserStruct)
+  user: UserFactory.new(gateway: User, struct: UserStruct),
+  wishes: WishFactory.new(gateway: Wish, struct: WishStruct)
 }
 
 RepositoryRegistry.register_many(REPOSITORIES)

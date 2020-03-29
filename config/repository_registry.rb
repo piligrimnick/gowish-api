@@ -13,8 +13,18 @@ class RepositoryRegistry
     end
 
     def for(type)
-      repositories.fetch(type) do
+      repo = repositories.fetch(type) do
         raise(RepositoryNotFound, "Repository #{type} not registered")
+      end
+
+      if Rails.env.development?
+        repo.class.new(
+          gateway: repo.instance_variable_get(:@gateway),
+          collection: repo.instance_variable_get(:@collection),
+          struct: repo.instance_variable_get(:@struct)
+        )
+      else
+        repo
       end
     end
 

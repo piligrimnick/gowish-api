@@ -10,14 +10,28 @@ class ApplicationFactory
     structurize
   end
 
-  def find(id)
+  def update(id, params = {})
     @object = gateway.find(id)
+
+    object.update!(params)
 
     structurize
   end
 
-  def destroy(id)
-    gateway.destroy!(id)
+  def find(id, filter_params = {})
+    @object = gateway.where(filter_params.merge(id: id)).take
+
+    structurize
+  end
+
+  def destroy(id, filter_params = {})
+    gateway.where(filter_params.merge(id: id)).take&.destroy!
+  end
+
+  def first
+    @object = gateway.first
+
+    structurize
   end
 
   def last

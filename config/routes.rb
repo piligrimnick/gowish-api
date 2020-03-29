@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  apipie
   use_doorkeeper do
     skip_controllers :applications, :authorized_applications
   end
@@ -9,6 +10,8 @@ Rails.application.routes.draw do
       devise_for :users, controllers: {
            registrations: 'api/v1/users/registrations',
        }, skip: [:sessions, :password]
+
+       resources :wishes
     end
   end
 end

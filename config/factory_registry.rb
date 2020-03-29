@@ -13,8 +13,17 @@ class FactoryRegistry
     end
 
     def for(type)
-      factories.fetch(type) do
+      factory = factories.fetch(type) do
         raise(FactoryNotFound, "Factory #{type} not registered")
+      end
+
+      if Rails.env.development?
+        factory.class.new(
+          gateway: factory.instance_variable_get(:@gateway),
+          struct: factory.instance_variable_get(:@struct)
+        )
+      else
+        factory
       end
     end
 
