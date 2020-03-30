@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: gowish_api_production
-  username: gowish_api
-  password: <%= ENV['GOWISH_API_DATABASE_PASSWORD'] %>
+  username: postgres
+  url: ENV['DATABASE_URL']
