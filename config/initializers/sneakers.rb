@@ -1,3 +1,6 @@
 require 'sneakers'
 
-Sneakers.configure()
+Sneakers.configure({
+  daemonize: true,
+  log: 'sneakers.log'
+})

@@ -82,4 +82,4 @@ production:
   <<: *default
   database: gowish_api_production
   username: postgres
-  url: ENV['DATABASE_URL']
+  url: <%= ENV['DATABASE_URL'] %>
