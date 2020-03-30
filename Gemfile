@@ -30,6 +30,8 @@ gem 'devise'
 gem 'doorkeeper'
 gem 'dry-initializer'
 gem 'dry-struct'
+gem 'sneakers'
+gem "bunny", ">= 2.14.1"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
