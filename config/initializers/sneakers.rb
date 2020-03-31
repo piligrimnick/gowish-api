@@ -2,5 +2,5 @@ require 'sneakers'
 
 Sneakers.configure({
   daemonize: true,
-  log: 'sneakers.log'
+  log: 'log/sneakers.log'
 })

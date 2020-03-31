@@ -80,6 +80,7 @@ test:
 #
 production:
   <<: *default
+  username: <%= ENV["PG_USER"] %>
+  password: <%= ENV["PG_PASSWORD"] %>
+  host: <%= ENV["PG_HOST"] %>
   database: gowish_api_production
-  username: postgres
-  url: <%= ENV['DATABASE_URL'] %>
