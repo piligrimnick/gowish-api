@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   apipie
   use_doorkeeper do
     skip_controllers :applications, :authorized_applications
+    controllers tokens: 'api/v1/auth'
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
