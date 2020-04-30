@@ -12,12 +12,10 @@ module Wishes
     end
 
     def call
-      wish_factory.create(wish.to_h.symbolize_keys)
+      Create.call(user, wish: wish.to_h.symbolize_keys)
     end
 
     private
-
-    attr_reader :user_factory, :wish_factory, :user
 
     def user
       @user ||= user_factory.find_or_create_from_telegram(telegram_user.to_h.symbolize_keys)
@@ -25,10 +23,6 @@ module Wishes
 
     def user_factory
       @user_factory ||= FactoryRegistry.for(:user)
-    end
-
-    def wish_factory
-      @wish_factory ||= WishFactory.new(gateway: user.wishes)
     end
   end
 end

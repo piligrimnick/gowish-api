@@ -22,7 +22,7 @@ module Api
       api :POST, '/wishes'
       param_group :wish
       def create
-        render json: wish_factory.create(wish_params)
+        render json: Wishes::Create(current_user, wish_params)
       end
 
       api :PUT, '/wishes/:id'
@@ -47,14 +47,14 @@ module Api
       def wishes_repo
         @wishes_repo ||= RepositoryRegistry.register(
           :user_wishes,
-          WishesRepository.new(gateway: current_resource_owner.wishes)
+          WishesRepository.new(gateway: current_user.wishes)
         )
       end
 
       def wish_factory
         @wish_factory ||= FactoryRegistry.register(
           :user_wish,
-          WishFactory.new(gateway: current_resource_owner.wishes)
+          WishFactory.new(gateway: current_user.wishes)
         )
       end
 

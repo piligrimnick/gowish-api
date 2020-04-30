@@ -29,8 +29,10 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'apipie-rails'
 gem 'devise'
 gem 'doorkeeper'
+gem 'doorkeeper-grants_assertion'
 gem 'dry-initializer'
 gem 'dry-struct'
+gem 'dry-monads'
 gem 'sneakers'
 gem "bunny", ">= 2.14.1"
 gem "rack-cors"
