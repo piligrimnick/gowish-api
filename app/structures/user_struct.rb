@@ -5,6 +5,6 @@ class UserStruct < ApplicationStruct
   attribute :lastname, Types::String.optional
 
   def secure_attributes
-    attributes.except(:id)
+    attributes.except(:email)
   end
 end

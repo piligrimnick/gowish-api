@@ -13,7 +13,9 @@ Rails.application.routes.draw do
      }, skip: [:sessions, :password]
 
 
+     get 'user_wishes/:user_id', to: 'wishes#user_wishes'
      resources :wishes
+     resources :users, only: [:show]
    end
  end
 end

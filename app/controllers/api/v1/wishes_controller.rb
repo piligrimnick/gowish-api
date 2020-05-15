@@ -1,6 +1,8 @@
 module Api
   module V1
     class WishesController < ApplicationController
+      skip_before_action :doorkeeper_authorize!, only: [:user_wishes]
+
       def_param_group :wish do
         param :wish, Hash, required: true do
           param :body, String, desc: 'Text description'
@@ -8,9 +10,15 @@ module Api
         end
       end
 
+      api :GET, '/user_wishes/:user_id'
+      param :user_id, String, required: true, desc: 'User ID'
+      def user_wishes
+        render json: wishes_repo.filter(user_id: params[:user_id])
+      end
+
       api :GET, '/wishes'
       def index
-        render json: wishes_repo.all
+        render json: current_user_wishes_repo.all
       end
 
       api :GET, '/wishes/:id'
@@ -44,18 +52,16 @@ module Api
         @wish ||= wish_factory.find(params[:id])
       end
 
+      def current_user_wishes_repo
+        @current_user_wishes_repo ||= WishesRepository.new(gateway: current_user.wishes)
+      end
+
       def wishes_repo
-        @wishes_repo ||= RepositoryRegistry.register(
-          :user_wishes,
-          WishesRepository.new(gateway: current_user.wishes)
-        )
+        @wishes_repo ||= RepositoryRegistry.for(:wishes)
       end
 
       def wish_factory
-        @wish_factory ||= FactoryRegistry.register(
-          :user_wish,
-          WishFactory.new(gateway: current_user.wishes)
-        )
+        @wish_factory ||= WishFactory.new(gateway: current_user.wishes)
       end
 
       def wish_params
