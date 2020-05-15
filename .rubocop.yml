@@ -1,0 +1,40 @@
+AllCops:
+  TargetRubyVersion: 2.7.0
+  Exclude:
+    - "db/**/*"
+    - "config/**/*"
+    - "bin/**/*"
+    - "Gemfile"
+    - "vendor/**/*"
+
+Metrics/AbcSize:
+  Max: 25
+
+Layout/LineLength:
+  Max: 120
+
+Metrics/MethodLength:
+  Max: 15
+  Exclude:
+    - "**/spec/**/*.rb"
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Metrics/BlockLength:
+  Max: 60
+  Exclude:
+    - "**/*_spec.rb"
+    - "spec/factories/*.rb"
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true

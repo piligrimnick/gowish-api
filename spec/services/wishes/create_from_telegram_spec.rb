@@ -45,7 +45,7 @@ RSpec.describe Wishes::CreateFromTelegram, type: :service do
     context 'and user does not exist' do
       it 'creates a user and wish for created user' do
         expect { call_service }.to change(User, :count).by(1)
-                               .and change(Wish, :count).by(1)
+                                                       .and change(Wish, :count).by(1)
         expect(subject).to have_attributes(user_id: service_instance.send(:user).id, **wish_attributes)
       end
     end

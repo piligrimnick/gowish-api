@@ -47,6 +47,7 @@ group :development, :test do
   gem 'simplecov'
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'rubocop'
 end
 
 group :development do

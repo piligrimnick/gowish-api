@@ -4,7 +4,6 @@ class ApplicationService
   include Rails.application.routes.url_helpers
 
   class << self
-
     # Instantiates and calls the service at once
     def call(*args, &block)
       new(*args).call(&block)

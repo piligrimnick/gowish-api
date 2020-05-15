@@ -12,8 +12,6 @@ module Wishes
 
     private
 
-    attr_reader :wish_factory
-
     def wish_factory
       @wish_factory ||= WishFactory.new(gateway: ::Wish.where(user_id: user_id))
     end

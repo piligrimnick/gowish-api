@@ -12,5 +12,4 @@ class UserFactory < ApplicationFactory
 
     structurize
   end
-
 end
