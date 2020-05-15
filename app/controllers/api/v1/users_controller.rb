@@ -3,13 +3,18 @@ module Api
     class UsersController < ApplicationController
       skip_before_action :doorkeeper_authorize!, only: [:show]
 
-      api :GET, 'users/:id'
+      api :GET, '/users/:id'
       param :id, String, required: true, desc: 'id of the requested user'
       def show
-        render json: user_factory.find(params[:id])
+        render json: user.secure_attributes
       end
 
       private
+
+      def user
+        @user ||= user_factory.find(params[:id])
+      end
+
 
       def user_factory
         @user_factory ||= FactoryRegistry.for(:user)
