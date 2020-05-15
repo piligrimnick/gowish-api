@@ -1,25 +1,16 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## ShWish app api
 
-Things you may want to cover:
+app: https://shwish.app
 
-* Ruby version
+api: https://api.shwish.app/api
 
-* System dependencies
+api docs: https://api.shwish.app/apipie
 
-* Configuration
+### Todos
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-# gowish-api
+- Implement dry-monads
+- Implement dry-validation
+- Cover controllers with specs
+- Use ENV variables where it is necessary
