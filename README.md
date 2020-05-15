@@ -14,3 +14,4 @@ api docs: https://api.shwish.app/apipie
 - Implement dry-validation
 - Cover controllers with specs
 - Use ENV variables where it is necessary
+- Improve user setting (change email, password, etc.)
