@@ -12,7 +12,7 @@ module Wishes
     end
 
     def call
-      Create.call(user, wish: wish.to_h.symbolize_keys)
+      Wishes::Create.call(user_id: user.id, wish: wish.to_h.symbolize_keys)
     end
 
     private

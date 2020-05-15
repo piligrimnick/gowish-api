@@ -1,6 +1,6 @@
 module Wishes
   class Create < ApplicationService
-    param :user
+    option :user_id
     option :wish, {} do
       option :body
       option :url, optional: true
@@ -15,7 +15,7 @@ module Wishes
     attr_reader :wish_factory
 
     def wish_factory
-      @wish_factory ||= WishFactory.new(gateway: user.wishes)
+      @wish_factory ||= WishFactory.new(gateway: ::Wish.where(user_id: user_id))
     end
   end
 end

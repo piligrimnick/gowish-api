@@ -30,7 +30,7 @@ module Api
       api :POST, '/wishes'
       param_group :wish
       def create
-        render json: Wishes::Create(current_user, wish_params)
+        render json: Wishes::Create.call(user_id: current_user.id, wish: wish_params)
       end
 
       api :PUT, '/wishes/:id'
