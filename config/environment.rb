@@ -13,7 +13,7 @@ REPOSITORIES = {
 
 FACTORIES = {
   user: UserFactory.new(gateway: User, struct: UserStruct),
-  wishes: WishFactory.new(gateway: Wish, struct: WishStruct)
+  wish: WishFactory.new(gateway: Wish, struct: WishStruct)
 }
 
 RepositoryRegistry.register_many(REPOSITORIES)

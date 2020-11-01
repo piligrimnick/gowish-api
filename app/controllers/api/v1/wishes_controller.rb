@@ -13,7 +13,13 @@ module Api
       api :GET, '/user_wishes/:user_id'
       param :user_id, String, required: true, desc: 'User ID'
       def user_wishes
-        render json: wishes_repo.filter(user_id: params[:user_id])
+        render json: wishes_repo.active.filter(user_id: params[:user_id])
+      end
+
+      api :GET, '/realised_user_wishes/:user_id'
+      param :user_id, String, required: true, desc: 'User ID'
+      def realised_user_wishes
+        render json: wishes_repo.realised.filter(user_id: params[:user_id])
       end
 
       api :GET, '/wishes'
@@ -44,6 +50,13 @@ module Api
       param :id, :number, required: true, desc: 'id of the requested wish'
       def destroy
         render json: wish_factory.destroy(wish.id)
+      end
+
+      api :PUT, '/wishes/:id/realise'
+      param :id, :number, required: true, desc: 'id of the requested wish'
+      def realise
+        @wish = Wishes::Realise.call(wish_id: wish.id)
+        render json: wish
       end
 
       private

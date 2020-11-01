@@ -14,7 +14,12 @@ Rails.application.routes.draw do
 
 
      get 'user_wishes/:user_id', to: 'wishes#user_wishes'
-     resources :wishes
+     get 'realised_user_wishes/:user_id', to: 'wishes#realised_user_wishes'
+     resources :wishes do
+       member do
+         put :realise
+       end
+     end
      resources :users, only: [:show]
    end
  end
