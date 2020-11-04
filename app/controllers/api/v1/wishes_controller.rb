@@ -59,6 +59,20 @@ module Api
         render json: wish
       end
 
+      api :PUT, '/wishes/:id/book'
+      param :id, :number, required: true, desc: 'id of the requested wish'
+      def book
+        @wish = wish_factory.book(wish_id: wish.id, booker_id: current_user.id)
+        render json: wish
+      end
+
+      api :PUT, '/wishes/:id/book'
+      param :id, :number, required: true, desc: 'id of the requested wish'
+      def unbook
+        @wish = wish_factory.unbook(wish_id: wish.id, booker_id: current_user.id)
+        render json: wish
+      end
+
       private
 
       def wish
@@ -74,7 +88,7 @@ module Api
       end
 
       def wish_factory
-        @wish_factory ||= WishFactory.new(gateway: current_user.wishes)
+        @wish_factory ||= FactoryRegistry.for(:wish)
       end
 
       def wish_params

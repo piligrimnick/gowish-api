@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_01_203429) do
+ActiveRecord::Schema.define(version: 2020_11_04_155905) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bookings", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "wish_id", null: false
+    t.string "comment"
+    t.jsonb "meta", default: {}
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id", "wish_id"], name: "index_bookings_on_user_id_and_wish_id", unique: true
+    t.index ["wish_id"], name: "index_bookings_on_wish_id", unique: true
+  end
 
   create_table "oauth_access_grants", force: :cascade do |t|
     t.bigint "resource_owner_id", null: false
@@ -84,6 +95,8 @@ ActiveRecord::Schema.define(version: 2020_11_01_203429) do
     t.index ["user_id"], name: "index_wishes_on_user_id"
   end
 
+  add_foreign_key "bookings", "users"
+  add_foreign_key "bookings", "wishes"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_grants", "users", column: "resource_owner_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"

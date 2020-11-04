@@ -15,4 +15,7 @@ class User < ApplicationRecord
            dependent: :delete_all # or :destroy if you need callbacks
 
   has_many :wishes
+
+  has_many :bookings, dependent: :destroy
+  has_many :booked_wishes, through: :bookings, source: :wish
 end

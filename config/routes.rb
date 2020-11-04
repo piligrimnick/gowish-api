@@ -18,6 +18,8 @@ Rails.application.routes.draw do
      resources :wishes do
        member do
          put :realise
+         put :book
+         put :unbook
        end
      end
      resources :users, only: [:show]
