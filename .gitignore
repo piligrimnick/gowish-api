@@ -22,6 +22,9 @@
 /config/master.key
 
 .env.production.local
+.env.development.local
+.env.test.local
+.env.local
 
 /config/credentials/development.key
 
