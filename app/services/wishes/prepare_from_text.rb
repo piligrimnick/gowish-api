@@ -9,11 +9,11 @@ module Wishes
 
       metadata = MetaInspector.new(url)
 
-      body = text.gsub(url, '')
+      body = text.gsub(url, '').to_s
       body += "\n\n"
-      body += metadata.best_title
+      body += metadata.best_title.to_s
       body += "\n\n"
-      body += metadata.best_description
+      body += metadata.best_description.to_s
 
       { body: body.strip, url: metadata.canonicals.first&.dig(:href) || url}
     end
