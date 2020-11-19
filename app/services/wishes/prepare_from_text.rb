@@ -7,7 +7,9 @@ module Wishes
 
       return { body: text, url: nil } if url.blank?
 
-      metadata = MetaInspector.new(url)
+      metadata = MetaInspector.new(url, allow_redirections: false)
+
+      return { body: text, url: url } if metadata.response.status != 200
 
       body = text.gsub(url, '').to_s
       body += "\n\n"
