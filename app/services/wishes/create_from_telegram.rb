@@ -6,13 +6,10 @@ module Wishes
       option :firstname, optional: true
       option :lastname, optional: true
     end
-    option :wish, {} do
-      option :body
-      option :url, optional: true
-    end
+    option :message_text
 
     def call
-      Wishes::Create.call(user_id: user.id, wish: wish.to_h.symbolize_keys)
+      Wishes::Create.call(user_id: user.id, wish: Wishes::PrepareFromText.call(message_text))
     end
 
     private

@@ -33,9 +33,9 @@ gem 'doorkeeper-grants_assertion'
 gem 'dry-initializer'
 gem 'dry-struct'
 gem 'dry-monads'
-gem 'sneakers'
-gem "bunny", ">= 2.14.1"
-gem "rack-cors"
+gem 'rack-cors'
+gem 'telegram-bot-ruby'
+gem 'metainspector'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
