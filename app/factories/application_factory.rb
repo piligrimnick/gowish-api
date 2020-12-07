@@ -20,6 +20,7 @@ class ApplicationFactory
 
   def find(id, filter_params = {})
     @object = gateway.where(filter_params.merge(id: id)).take
+    return if @object.blank?
 
     structurize
   end
