@@ -1,7 +1,12 @@
 module Api
   module V1
     class UsersController < ApplicationController
-      skip_before_action :doorkeeper_authorize!, only: [:show]
+      skip_before_action :doorkeeper_authorize!, only: %i(index show)
+
+      api :GET, '/users'
+      def index
+        render json: user_repository.all
+      end
 
       api :GET, '/users/:id'
       param :id, String, required: true, desc: 'id of the requested user'
@@ -18,6 +23,10 @@ module Api
 
       def user_factory
         @user_factory ||= FactoryRegistry.for(:user)
+      end
+
+      def user_repository
+        @user_repository ||= RepositoryRegistry.for(:users)
       end
     end
   end

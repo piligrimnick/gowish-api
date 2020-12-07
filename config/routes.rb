@@ -22,7 +22,7 @@ Rails.application.routes.draw do
          put :unbook
        end
      end
-     resources :users, only: [:show]
+     resources :users, only: %i(index show)
    end
  end
 end
