@@ -61,5 +61,7 @@ Telegram::Bot::Client.run(token, logger: Rails.logger) do |bot|
         text: "Желание сохранено с ID: #{wish.id} :)"
       )
     end
+    rescue => e
+      puts e
   end
 end
