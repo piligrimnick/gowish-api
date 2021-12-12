@@ -17,7 +17,11 @@ module Wishes
       body += "\n\n"
       body += metadata.best_description.to_s
 
-      { body: body.strip, url: metadata.canonicals.first&.dig(:href) || url}
+      {
+        body: body.strip,
+        url: metadata.canonicals.first&.dig(:href) || url,
+        picture: Utils::DownloadImage.call(url: metadata.images.best)
+      }
     end
   end
 end

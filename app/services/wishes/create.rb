@@ -4,6 +4,7 @@ module Wishes
     option :wish, {} do
       option :body
       option :url, optional: true
+      option :picture, optional: true
     end
 
     def call

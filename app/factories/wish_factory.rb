@@ -1,6 +1,16 @@
 class WishFactory < ApplicationFactory
+  include Rails.application.routes.url_helpers
+
   def initialize(gateway: Wish, struct: WishStruct)
     super
+  end
+
+  def create(params = {})
+    @object = gateway.create!(params.except(:picture))
+    @object.picture.attach(io: params[:picture], filename: @object.id) if params[:picture].present?
+    @object.save
+
+    structurize
   end
 
   def realise(wish_id)
@@ -31,6 +41,10 @@ class WishFactory < ApplicationFactory
     if object.booking.present?
       attributes[:booking] = BookingStruct.new(object.booking.attributes).to_h
       attributes[:booker] = UserStruct.new(object.booker.attributes).to_h
+    end
+
+    if object.picture.present?
+      attributes[:picture_url] = rails_blob_path(object.picture, only_path: true)
     end
 
     struct.new(attributes)

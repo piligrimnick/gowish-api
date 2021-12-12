@@ -8,4 +8,5 @@ class WishStruct < ApplicationStruct
   attribute? :user, Types::Hash
   attribute? :booking, Types::Hash
   attribute? :booker, Types::Hash
+  attribute? :picture_url, Types::String
 end
