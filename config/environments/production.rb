@@ -24,9 +24,6 @@ Rails.application.configure do
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   config.action_controller.asset_host = 'https://api.shwish.app'
 
-
-  ActiveStorage::Current.host = 'api.shwish.app'
-
   Rails.application.routes.default_url_options[:host] = 'api.shwish.app'
 
   # Specifies the header that your server uses for sending files.
