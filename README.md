@@ -2,11 +2,11 @@
 
 ## ShWish app api
 
-app: https://shwish.app
+app: https://wishes.bgmlv.com
 
-api: https://api.shwish.app/api
+api: https://api.wishes.bgmlv.com/api
 
-api docs: https://api.shwish.app/apipie
+api docs: https://wishes.bgmlv.com/apipie
 
 ### Todos
 
