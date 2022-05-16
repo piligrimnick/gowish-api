@@ -6,6 +6,17 @@ local:
   service: Disk
   root: <%= Rails.root.join("storage") %>
 
+minio:
+  service: S3
+  access_key_id: P25W6X6D2SZHSH48YDC8
+  secret_access_key: AnoF4x55Oi+7+P5Ga2tfESicVwnAhwhRienZvOlx
+  region: us-east-1
+  bucket: wishes
+  endpoint: http://minio:9000
+  force_path_style: true
+  upload:
+    acl: "public-read"
+
 # Use rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
 # amazon:
 #   service: S3
