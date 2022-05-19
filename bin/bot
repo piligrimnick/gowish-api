@@ -22,6 +22,8 @@ Telegram::Bot::Client.run(token, logger: Rails.logger) do |bot|
       bot.api.send_message(chat_id: message.chat.id, text: "Hello, #{message.from.first_name}")
     when '/stop'
       bot.api.send_message(chat_id: message.chat.id, text: "Bye, #{message.from.first_name}")
+    when '/share_link'
+      bot.api.send_message(chat_id: message.chat.id, text: "https://wishes.bgmlv.com/profile/#{user.id}")
     when '/list'
       wishes = RepositoryRegistry.for(:wishes).filter(user_id: user.id, state: :active)
 
