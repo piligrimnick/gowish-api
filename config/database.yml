@@ -23,6 +23,9 @@ default: &default
 
 development:
   <<: *default
+  username: <%= ENV["PG_USER"] %>
+  password: <%= ENV["PG_PASSWORD"] %>
+  host: <%= ENV["PG_HOST"] %>
   database: gowish_api_development
 
   # The specified database role being used to connect to postgres.

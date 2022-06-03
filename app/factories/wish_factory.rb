@@ -6,9 +6,11 @@ class WishFactory < ApplicationFactory
   end
 
   def create(params = {})
-    @object = gateway.create!(params.except(:picture))
-    @object.picture.attach(io: params[:picture], filename: @object.id) if params[:picture].present?
-    @object.save
+    gateway.transaction do
+      @object = gateway.create!(params.except(:picture))
+      @object.picture.attach(io: params[:picture], filename: @object.id) if params[:picture].present?
+      @object.save
+    end
 
     structurize
   end
