@@ -165,7 +165,7 @@ GEM
     faraday_middleware (1.0.0)
       faraday (~> 1.0)
     fastimage (2.1.7)
-    ffi (1.12.2)
+    ffi (1.15.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
     http-cookie (1.0.3)
@@ -173,7 +173,7 @@ GEM
     i18n (1.10.0)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
-    image_processing (1.12.1)
+    image_processing (1.12.2)
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
     jaro_winkler (1.5.4)
@@ -349,7 +349,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   faraday
-  image_processing (~> 1.2)
+  image_processing (~> 1.12)
   listen (>= 3.0.5, < 3.2)
   metainspector
   pg (>= 0.18, < 2.0)
