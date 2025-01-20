@@ -1,5 +1,7 @@
 module Wishes
   class PrepareFromText < ApplicationService
+    USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+
     param :text
 
     def call
@@ -7,7 +9,13 @@ module Wishes
 
       return { body: text, url: nil } if url.blank?
 
-      metadata = MetaInspector.new(url, allow_redirections: false)
+      metadata = MetaInspector.new(
+        url,
+        allow_redirections: false,
+        allow_non_html_content: true,
+        download_images: false,
+        headers: { 'User-Agent' => USER_AGENT }
+      )
 
       return { body: text, url: url } if metadata.response.status != 200
 
