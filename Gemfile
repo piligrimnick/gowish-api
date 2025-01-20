@@ -1,15 +1,15 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.5'
+ruby '2.7.8'
 gem "dotenv-rails", require: 'dotenv/rails-now'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0.2', '>= 6.0.2.2'
+gem 'rails', '~> 6.1.7'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
-gem 'puma', '~> 4.3'
+gem 'puma', '>= 6.4.3'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
@@ -28,7 +28,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'apipie-rails'
 gem 'devise'
-gem 'doorkeeper'
+gem 'doorkeeper', '>= 5.6.6'
 gem 'doorkeeper-grants_assertion'
 gem 'dry-initializer'
 gem 'dry-struct'
@@ -38,6 +38,9 @@ gem 'telegram-bot-ruby'
 gem 'metainspector'
 gem 'faraday'
 gem "aws-sdk-s3", require: false
+
+gem "nokogiri", '1.15.7'
+gem 'concurrent-ruby', '1.3.4'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -58,6 +61,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'rubocop'
+  gem 'bundle-audit'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
