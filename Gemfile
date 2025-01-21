@@ -28,7 +28,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'apipie-rails'
 gem 'devise'
-gem 'doorkeeper', '>= 5.6.6'
+gem 'doorkeeper', '<= 5.3.2'
 gem 'doorkeeper-grants_assertion'
 gem 'dry-initializer'
 gem 'dry-struct'
