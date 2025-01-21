@@ -12,14 +12,16 @@ module Api
 
       api :GET, '/user_wishes/:user_id'
       param :user_id, String, required: true, desc: 'User ID'
+      param :o, String, required: false, desc: 'Order'
       def user_wishes
-        render json: wishes_repo.filter(user_id: params[:user_id], state: :active)
+        render json: wishes_repo.filter({user_id: params[:user_id], state: :active }, order: params[:o])
       end
 
       api :GET, '/realised_user_wishes/:user_id'
       param :user_id, String, required: true, desc: 'User ID'
+      param :o, String, required: false, desc: 'Order'
       def realised_user_wishes
-        render json: wishes_repo.filter(user_id: params[:user_id], state: :realised)
+        render json: wishes_repo.filter({user_id: params[:user_id], state: :realised}, order: params[:o])
       end
 
       api :GET, '/wishes'

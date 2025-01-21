@@ -3,8 +3,8 @@ class WishesRepository < ApplicationRepository
     super
   end
 
-  def filter(params)
-    @objects = gateway.order(:created_at).where(params)
+  def filter(params, order: 'created_at desc')
+    @objects = gateway.order(order).where(params)
 
     structurize
   end
