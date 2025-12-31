@@ -5,6 +5,39 @@ info:
   version: v1
   description: API for GoWish application
 paths:
+  "/api/users":
+    get:
+      summary: List users
+      tags:
+      - Users
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+  "/api/users/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: User ID
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Get a user
+      tags:
+      - Users
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
   "/api/user_wishes/{user_id}":
     get:
       summary: Get user wishes
@@ -13,16 +46,16 @@ paths:
       parameters:
       - name: user_id
         in: path
+        description: User ID
         required: true
         schema:
           type: string
-        description: User ID
       - name: o
         in: query
         required: false
+        description: Order
         schema:
           type: string
-        description: Order
       responses:
         '200':
           description: Success
@@ -37,19 +70,21 @@ paths:
       summary: Get realised user wishes
       tags:
       - Wishes
+      security:
+      - bearer_auth: []
       parameters:
       - name: user_id
         in: path
+        description: User ID
         required: true
         schema:
           type: string
-        description: User ID
       - name: o
         in: query
         required: false
+        description: Order
         schema:
           type: string
-        description: Order
       responses:
         '200':
           description: Success
@@ -83,6 +118,16 @@ paths:
       - Wishes
       security:
       - bearer_auth: []
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: Unauthorized
       requestBody:
         content:
           application/json:
@@ -98,29 +143,20 @@ paths:
                     url:
                       type: string
                       description: URL
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                type: object
-        '401':
-          description: Unauthorized
   "/api/wishes/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: Wish ID
+      required: true
+      schema:
+        type: integer
     get:
       summary: Get a wish
       tags:
       - Wishes
       security:
       - bearer_auth: []
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        description: Wish ID
       responses:
         '200':
           description: Success
@@ -136,13 +172,16 @@ paths:
       - Wishes
       security:
       - bearer_auth: []
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        description: Wish ID
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: Unauthorized
       requestBody:
         content:
           application/json:
@@ -158,28 +197,12 @@ paths:
                     url:
                       type: string
                       description: URL
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                type: object
-        '401':
-          description: Unauthorized
     delete:
       summary: Delete a wish
       tags:
       - Wishes
       security:
       - bearer_auth: []
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        description: Wish ID
       responses:
         '200':
           description: Success
@@ -199,10 +222,10 @@ paths:
       parameters:
       - name: id
         in: path
+        description: Wish ID
         required: true
         schema:
           type: integer
-        description: Wish ID
       responses:
         '200':
           description: Success
@@ -222,10 +245,10 @@ paths:
       parameters:
       - name: id
         in: path
+        description: Wish ID
         required: true
         schema:
           type: integer
-        description: Wish ID
       responses:
         '200':
           description: Success
@@ -245,10 +268,10 @@ paths:
       parameters:
       - name: id
         in: path
+        description: Wish ID
         required: true
         schema:
           type: integer
-        description: Wish ID
       responses:
         '200':
           description: Success
@@ -258,39 +281,6 @@ paths:
                 type: object
         '401':
           description: Unauthorized
-  "/api/users":
-    get:
-      summary: List users
-      tags:
-      - Users
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-  "/api/users/{id}":
-    get:
-      summary: Get a user
-      tags:
-      - Users
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
-        description: User ID
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                type: object
 servers:
 - url: "{protocol}://{host}"
   variables:
