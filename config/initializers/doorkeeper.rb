@@ -83,6 +83,15 @@ Doorkeeper.configure do
   #
   # enforce_content_type
 
+  # Starting from 5.5.0 RC1 Doorkeeper requires client authentication for Resource Owner Password Grant
+  # as stated in the OAuth RFC. To opt out of this:
+  skip_client_authentication_for_password_grant true
+
+  # Since we also use assertion grant (for Telegram), we might need to skip client auth for it too
+  # if doorkeeper-grants_assertion supports it.
+  # (Actually, Doorkeeper typically applies this to more than just password grant depending on version)
+
+
   # Authorization Code expiration time (default: 10 minutes).
   #
   # authorization_code_expires_in 10.minutes

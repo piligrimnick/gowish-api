@@ -5,7 +5,7 @@ ruby '4.0.0'
 gem "dotenv-rails", require: 'dotenv/rails-now'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.1.7'
+gem 'rails', '~> 8.0.2.1'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 1.5'
 # Use Puma as the app server
@@ -29,7 +29,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'rswag-api'
 gem 'rswag-ui'
 gem 'devise'
-gem 'doorkeeper', '<= 5.3.2'
+gem 'doorkeeper'
 gem 'doorkeeper-grants_assertion'
 gem 'dry-initializer'
 gem 'dry-struct'
@@ -65,16 +65,14 @@ group :development, :test do
   gem 'pry-rails'
   gem 'simplecov'
   gem 'factory_bot_rails'
-  gem 'faker'
   gem 'rubocop'
 end
 
 group :development do
-  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'listen', '>= 3.5'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'rubocop'
   gem 'bundle-audit'
 end
 
