@@ -338,6 +338,8 @@ GEM
       rexml
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 1.7)
+    rubocop-faker (1.0.0)
+      rubocop (>= 0.74)
     ruby-progressbar (1.10.1)
     ruby-vips (2.2.2)
       ffi (~> 1.12)
@@ -417,6 +419,7 @@ DEPENDENCIES
   rswag-specs
   rswag-ui
   rubocop
+  rubocop-faker (~> 1.0)
   simplecov
   spring
   spring-watcher-listen (~> 2.0.0)

@@ -4,11 +4,11 @@ module Api
       skip_before_action :doorkeeper_authorize!, only: [:user_wishes]
 
       def user_wishes
-        render json: wishes_repo.filter({user_id: params[:user_id], state: :active }, order: params[:o])
+        render json: wishes_repo.filter({ user_id: params[:user_id], state: :active }, order: params[:o])
       end
 
       def realised_user_wishes
-        render json: wishes_repo.filter({user_id: params[:user_id], state: :realised}, order: params[:o])
+        render json: wishes_repo.filter({ user_id: params[:user_id], state: :realised }, order: params[:o])
       end
 
       def index

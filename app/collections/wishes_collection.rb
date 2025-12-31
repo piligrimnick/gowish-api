@@ -9,9 +9,7 @@ class WishesCollection < ApplicationCollection
         attributes[:booking] = BookingStruct.new(object.booking.attributes).to_h
         attributes[:booker] = UserStruct.new(object.booker.attributes).to_h
       end
-      if object.picture.present?
-        attributes[:picture_url] = rails_blob_path(object.picture, only_path: true)
-      end
+      attributes[:picture_url] = rails_blob_path(object.picture, only_path: true) if object.picture.present?
 
       struct.new(attributes)
     end
