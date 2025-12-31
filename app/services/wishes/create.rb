@@ -1,7 +1,7 @@
 module Wishes
   class Create < ApplicationService
     option :user_id
-    option :wish, {} do
+    option :wish do
       option :body
       option :url, optional: true
       option :picture, optional: true

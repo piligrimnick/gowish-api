@@ -1,13 +1,13 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.8'
+ruby '4.0.0'
 gem "dotenv-rails", require: 'dotenv/rails-now'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.1.7'
 # Use postgresql as the database for Active Record
-gem 'pg', '>= 0.18', '< 2.0'
+gem 'pg', '>= 1.5'
 # Use Puma as the app server
 gem 'puma', '>= 6.4.3'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -40,8 +40,20 @@ gem 'metainspector'
 gem 'faraday'
 gem "aws-sdk-s3", require: false
 
-gem "nokogiri", '1.15.7'
+gem "nokogiri", '>= 1.16'
 gem 'concurrent-ruby', '1.3.4'
+gem 'mutex_m'
+gem 'tsort'
+gem 'ostruct'
+gem 'base64'
+gem 'csv'
+gem 'observer'
+gem 'getoptlong'
+gem 'syslog'
+gem 'abbrev'
+gem 'drb'
+gem 'prime'
+gem 'benchmark'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
