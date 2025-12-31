@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  apipie
+  mount Rswag::Ui::Engine => '/api-docs'
+  mount Rswag::Api::Engine => '/api-docs'
   use_doorkeeper do
     skip_controllers :applications, :authorized_applications
     controllers tokens: 'api/v1/auth'

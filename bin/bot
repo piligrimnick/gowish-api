@@ -3,7 +3,7 @@ require_relative '../config/environment'
 
 require 'telegram/bot'
 
-token = Rails.application.credentials.telegram[:token]
+token = ENV['TELEGRAM_TOKEN']
 
 Telegram::Bot::Client.run(token, logger: Rails.logger) do |bot|
   bot.logger.info('Bot has been started')

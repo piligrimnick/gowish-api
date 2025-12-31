@@ -1,0 +1,305 @@
+---
+openapi: 3.0.1
+info:
+  title: GowishApi
+  version: v1
+  description: API for GoWish application
+paths:
+  "/api/user_wishes/{user_id}":
+    get:
+      summary: Get user wishes
+      tags:
+      - Wishes
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: User ID
+      - name: o
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Order
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+  "/api/realised_user_wishes/{user_id}":
+    get:
+      summary: Get realised user wishes
+      tags:
+      - Wishes
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: User ID
+      - name: o
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Order
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+  "/api/wishes":
+    get:
+      summary: List current user wishes
+      tags:
+      - Wishes
+      security:
+      - bearer_auth: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+        '401':
+          description: Unauthorized
+    post:
+      summary: Create a wish
+      tags:
+      - Wishes
+      security:
+      - bearer_auth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                wish:
+                  type: object
+                  properties:
+                    body:
+                      type: string
+                      description: Text description
+                    url:
+                      type: string
+                      description: URL
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: Unauthorized
+  "/api/wishes/{id}":
+    get:
+      summary: Get a wish
+      tags:
+      - Wishes
+      security:
+      - bearer_auth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Wish ID
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: Unauthorized
+    put:
+      summary: Update a wish
+      tags:
+      - Wishes
+      security:
+      - bearer_auth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Wish ID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                wish:
+                  type: object
+                  properties:
+                    body:
+                      type: string
+                      description: Text description
+                    url:
+                      type: string
+                      description: URL
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: Unauthorized
+    delete:
+      summary: Delete a wish
+      tags:
+      - Wishes
+      security:
+      - bearer_auth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Wish ID
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: Unauthorized
+  "/api/wishes/{id}/realise":
+    put:
+      summary: Mark wish as realised
+      tags:
+      - Wishes
+      security:
+      - bearer_auth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Wish ID
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: Unauthorized
+  "/api/wishes/{id}/book":
+    put:
+      summary: Book a wish
+      tags:
+      - Wishes
+      security:
+      - bearer_auth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Wish ID
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: Unauthorized
+  "/api/wishes/{id}/unbook":
+    put:
+      summary: Unbook a wish
+      tags:
+      - Wishes
+      security:
+      - bearer_auth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Wish ID
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: Unauthorized
+  "/api/users":
+    get:
+      summary: List users
+      tags:
+      - Users
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+  "/api/users/{id}":
+    get:
+      summary: Get a user
+      tags:
+      - Users
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: User ID
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+servers:
+- url: "{protocol}://{host}"
+  variables:
+    protocol:
+      default: http
+    host:
+      default: localhost:3000
+components:
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer

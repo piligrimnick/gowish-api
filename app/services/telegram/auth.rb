@@ -27,7 +27,7 @@ module Telegram
     end
 
     def secret_key
-      OpenSSL::Digest::SHA256.new.digest(Rails.application.credentials.telegram[:token])
+      OpenSSL::Digest::SHA256.new.digest(ENV['TELEGRAM_TOKEN'])
     end
 
     def user_factory

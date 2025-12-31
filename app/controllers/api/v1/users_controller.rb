@@ -3,13 +3,10 @@ module Api
     class UsersController < ApplicationController
       skip_before_action :doorkeeper_authorize!, only: %i(index show)
 
-      api :GET, '/users'
       def index
         render json: user_repository.all
       end
 
-      api :GET, '/users/:id'
-      param :id, String, required: true, desc: 'id of the requested user'
       def show
         render json: user.secure_attributes
       end
