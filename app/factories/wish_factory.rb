@@ -30,7 +30,7 @@ class WishFactory < ApplicationFactory
 
   def unbook(wish_id:, booker_id:)
     @object = Wish.find(wish_id)
-    object.booking.destroy! if object.booking.user_id == booker_id
+    object.booking.destroy! if object.booking&.user_id == booker_id
     @object.reload
     structurize
   end

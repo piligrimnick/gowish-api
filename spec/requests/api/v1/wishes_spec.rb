@@ -3,6 +3,14 @@
 require 'swagger_helper'
 
 RSpec.describe 'Wishes API', type: :request do
+  let(:user) { create(:user) }
+  let(:user_id) { user.id }
+  let(:token) { Doorkeeper::AccessToken.create(resource_owner_id: user.id, scopes: 'read write').token }
+  let(:Authorization) { "Bearer #{token}" }
+  let(:wish) { create(:wish, user: user) }
+  let(:id) { wish.id }
+  let(:wish_params) { { wish: { body: 'New body', url: 'http://example.com' } } }
+
   path '/api/user_wishes/{user_id}' do
     get 'Get user wishes' do
       tags 'Wishes'
@@ -21,6 +29,7 @@ RSpec.describe 'Wishes API', type: :request do
     get 'Get realised user wishes' do
       tags 'Wishes'
       produces 'application/json'
+      security [bearer_auth: []]
       parameter name: :user_id, in: :path, type: :string, description: 'User ID'
       parameter name: :o, in: :query, type: :string, required: false, description: 'Order'
 
@@ -43,6 +52,7 @@ RSpec.describe 'Wishes API', type: :request do
       end
 
       response '401', 'Unauthorized' do
+        let(:Authorization) { 'Bearer invalid' }
         run_test!
       end
     end
@@ -52,7 +62,7 @@ RSpec.describe 'Wishes API', type: :request do
       consumes 'application/json'
       produces 'application/json'
       security [bearer_auth: []]
-      parameter name: :wish, in: :body, schema: {
+      parameter name: :wish_params, in: :body, schema: {
         type: :object,
         properties: {
           wish: {
@@ -71,6 +81,7 @@ RSpec.describe 'Wishes API', type: :request do
       end
 
       response '401', 'Unauthorized' do
+        let(:Authorization) { 'Bearer invalid' }
         run_test!
       end
     end
@@ -90,6 +101,7 @@ RSpec.describe 'Wishes API', type: :request do
       end
 
       response '401', 'Unauthorized' do
+        let(:Authorization) { 'Bearer invalid' }
         run_test!
       end
     end
@@ -99,7 +111,7 @@ RSpec.describe 'Wishes API', type: :request do
       consumes 'application/json'
       produces 'application/json'
       security [bearer_auth: []]
-      parameter name: :wish, in: :body, schema: {
+      parameter name: :wish_params, in: :body, schema: {
         type: :object,
         properties: {
           wish: {
@@ -118,6 +130,7 @@ RSpec.describe 'Wishes API', type: :request do
       end
 
       response '401', 'Unauthorized' do
+        let(:Authorization) { 'Bearer invalid' }
         run_test!
       end
     end
@@ -133,6 +146,7 @@ RSpec.describe 'Wishes API', type: :request do
       end
 
       response '401', 'Unauthorized' do
+        let(:Authorization) { 'Bearer invalid' }
         run_test!
       end
     end
@@ -151,6 +165,7 @@ RSpec.describe 'Wishes API', type: :request do
       end
 
       response '401', 'Unauthorized' do
+        let(:Authorization) { 'Bearer invalid' }
         run_test!
       end
     end
@@ -169,6 +184,7 @@ RSpec.describe 'Wishes API', type: :request do
       end
 
       response '401', 'Unauthorized' do
+        let(:Authorization) { 'Bearer invalid' }
         run_test!
       end
     end
@@ -183,10 +199,12 @@ RSpec.describe 'Wishes API', type: :request do
 
       response '200', 'Success' do
         schema type: :object
+        before { create(:booking, wish: wish, user: user) }
         run_test!
       end
 
       response '401', 'Unauthorized' do
+        let(:Authorization) { 'Bearer invalid' }
         run_test!
       end
     end

@@ -3,6 +3,9 @@
 require 'swagger_helper'
 
 RSpec.describe 'Users API', type: :request do
+  let(:user) { create(:user) }
+  let(:id) { user.id }
+
   path '/api/users' do
     get 'List users' do
       tags 'Users'
@@ -16,10 +19,11 @@ RSpec.describe 'Users API', type: :request do
   end
 
   path '/api/users/{id}' do
+    parameter name: :id, in: :path, type: :string, description: 'User ID'
+
     get 'Get a user' do
       tags 'Users'
       produces 'application/json'
-      parameter name: :id, in: :path, type: :string, description: 'User ID'
 
       response '200', 'Success' do
         schema type: :object
