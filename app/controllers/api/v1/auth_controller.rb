@@ -2,12 +2,22 @@ module Api
   module V1
     class AuthController < Doorkeeper::TokensController
       def create
-        user = user_factory.find(authorize_response.token.resource_owner_id)
+        response = authorize_response
 
-        headers.merge!(authorize_response.headers)
+        # Check if response is an error
+        if response.is_a?(Doorkeeper::OAuth::ErrorResponse)
+          headers.merge!(response.headers)
+          render json: response.body, status: response.status
+          return
+        end
 
-        render json: authorize_response.body.merge(user.secure_attributes),
-               status: authorize_response.status
+        user = user_factory.find(response.token.resource_owner_id)
+        user_struct = UserStruct.new(user.attributes)
+
+        headers.merge!(response.headers)
+
+        render json: response.body.merge(user_struct.secure_attributes),
+               status: response.status
       rescue Doorkeeper::Errors::DoorkeeperError => e
         handle_token_exception(e)
       end

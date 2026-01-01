@@ -22,9 +22,7 @@ Doorkeeper.configure do
 
   resource_owner_from_credentials do |routes|
     user = User.find_for_database_authentication(email: params[:email])
-    if user && user.valid_for_authentication? { user.valid_password?(params[:password]) }
-      user
-    end
+    user if user&.valid_password?(params[:password])
   end
 
   # If you didn't skip applications controller from Doorkeeper routes in your application routes.rb

@@ -5,6 +5,80 @@ info:
   version: v1
   description: API for GoWish application
 paths:
+  "/oauth/token":
+    post:
+      summary: Authenticate with Telegram
+      tags:
+      - Authentication
+      parameters: []
+      responses:
+        '200':
+          description: Telegram authentication successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    description: OAuth access token
+                  token_type:
+                    type: string
+                    description: Token type (Bearer)
+                  expires_in:
+                    type: integer
+                    description: Token expiration time in seconds
+                  scope:
+                    type: string
+                    description: Token scope
+                  created_at:
+                    type: integer
+                    description: Token creation timestamp
+                  id:
+                    type: integer
+                    description: User ID
+                  username:
+                    type: string
+                    nullable: true
+                    description: Username
+                  firstname:
+                    type: string
+                    nullable: true
+                    description: First name
+                  lastname:
+                    type: string
+                    nullable: true
+                    description: Last name
+                required:
+                - access_token
+                - token_type
+                - expires_in
+                - scope
+                - created_at
+                - id
+        '400':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error code
+                  error_description:
+                    type: string
+                    description: Human-readable error description
+                required:
+                - error
+                - error_description
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: string
+        required: true
+        description: OAuth grant type
   "/api/users":
     get:
       summary: List users
