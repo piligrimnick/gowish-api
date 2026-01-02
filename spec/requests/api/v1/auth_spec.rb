@@ -120,6 +120,12 @@ RSpec.describe 'Authentication API', type: :request do
         let(:'auth_data[auth_date]') { Time.now.to_i.to_s }
         let(:'auth_data[hash]') { 'valid_hash' }
 
+        let!(:user) { create(:user) }
+
+        before do
+          allow(Telegram::Auth).to receive(:call).and_return(user)
+        end
+
         schema type: :object,
                properties: {
                  access_token: { type: :string },
@@ -133,9 +139,12 @@ RSpec.describe 'Authentication API', type: :request do
                  lastname: { type: :string, nullable: true }
                }
 
-        # Note: This will likely fail without proper Telegram auth setup
-        # You may want to skip this or mock the Telegram::Auth service
-        pending 'Requires Telegram auth configuration'
+        run_test! do |response|
+          data = JSON.parse(response.body)
+          expect(data['access_token']).to be_present
+          expect(data['token_type']).to eq('Bearer')
+          expect(data['id']).to eq(user.id)
+        end
       end
     end
   end

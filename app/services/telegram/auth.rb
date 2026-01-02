@@ -11,10 +11,10 @@ module Telegram
 
     def user
       @user ||= user_factory.find_or_create_from_telegram(
-        chat_id: auth_data[:id],
-        username: auth_data[:username],
-        firstname: auth_data[:first_name],
-        lastname: auth_data[:last_name]
+        chat_id: auth_data['id'],
+        username: auth_data['username'],
+        firstname: auth_data['first_name'],
+        lastname: auth_data['last_name']
       )
     end
 

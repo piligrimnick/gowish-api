@@ -30,7 +30,7 @@ gem 'rswag-api'
 gem 'rswag-ui'
 gem 'devise'
 gem 'doorkeeper'
-gem 'doorkeeper-grants_assertion'
+
 gem 'dry-initializer'
 gem 'dry-struct'
 gem 'dry-monads'
